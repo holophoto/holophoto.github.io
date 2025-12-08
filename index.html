@@ -1,12 +1,110 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<title>Personal website</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个人主页</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 50px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 30px;
+    }
+
+    /* 左侧图片区 */
+    .left {
+        width: 200px;
+        text-align: center;
+    }
+
+    .avatar {
+        width: 180px;
+        height: 220px;
+        background: #4A90E2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 20px;
+        border-radius: 10px;
+    }
+
+    /* 右侧按钮与介绍区 */
+    .right {
+        width: 70%;
+    }
+
+    .nav {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .nav button {
+        background: #4A90E2;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: 0.3s;
+    }
+
+    .nav button:hover {
+        background: #357ABD;
+    }
+
+    .section {
+        background: #4A90E2;
+        color: white;
+        padding: 40px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        font-size: 20px;
+        display: none; /* 默认隐藏 */
+    }
+
+    .section.active {
+        display: block;
+    }
+</style>
 </head>
+
 <body>
-<h1>Hello 大家好</h1>
-<h2>我是G4rnet，这是我的个人网站。</h2>
+
+<div class="left">
+    <div class="avatar">图片</div>
+</div>
+
+<div class="right">
+
+    <!-- 导航按钮 -->
+    <div class="nav">
+        <button onclick="showSection(1)">介绍1</button>
+        <button onclick="showSection(2)">介绍2</button>
+        <button onclick="showSection(3)">介绍3</button>
+        <button onclick="showSection(4)">介绍4</button>
+    </div>
+
+    <!-- 内容区 -->
+    <div id="sec1" class="section active">个人简介1</div>
+    <div id="sec2" class="section">个人简介2</div>
+    <div id="sec3" class="section">个人简介3</div>
+    <div id="sec4" class="section">个人简介4</div>
+
+</div>
+
+<script>
+    function showSection(num) {
+        document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
+        document.getElementById("sec" + num).classList.add("active");
+    }
+</script>
+
 </body>
 </html>
-
