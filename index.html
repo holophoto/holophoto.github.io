@@ -3,105 +3,137 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个人主页</title>
 
 <style>
+    /* ----------- 页面背景 ----------- */
     body {
-        font-family: Arial, sans-serif;
-        margin: 50px;
+        margin: 0;
+        font-family: "Microsoft YaHei", Arial, sans-serif;
+        background-size: cover;
+        padding: 40px;
         display: flex;
-        flex-direction: row;
+        justify-content: center;
+    }
+
+    .container {
+        width: 80%;
+        display: flex;
+        gap: 40px;
         align-items: flex-start;
-        gap: 30px;
     }
 
-    /* 左侧图片区 */
-    .left {
-        width: 200px;
-        text-align: center;
-    }
-
+    /* ----------- 左侧头像 ----------- */
     .avatar {
-        width: 180px;
-        height: 220px;
-        background: #4A90E2;
+        width: 200px;
+        height: 230px;
+        background: #7593AF;
+        border-radius: 15px;
         display: flex;
         justify-content: center;
         align-items: center;
         color: white;
         font-size: 20px;
-        border-radius: 10px;
+        box-shadow: 0px 6px 20px rgba(0,0,0,0.15);
     }
 
-    /* 右侧按钮与介绍区 */
+    /* ----------- 右侧内容布局 ----------- */
     .right {
-        width: 70%;
+        flex-grow: 1;
     }
 
     .nav {
         display: flex;
-        gap: 15px;
-        margin-bottom: 20px;
+        gap: 10px;
+        margin-bottom: 25px;
     }
 
+    /* ----------- 按钮固定25%宽 ----------- */
     .nav button {
-        background: #4A90E2;
-        border: none;
+        width: 25%;
+        background: #476F95;
         color: white;
-        padding: 10px 20px;
-        font-size: 16px;
+        border: none;
+        padding: 16px 0;
+        font-size: 18px;
+        border-radius: 8px;
         cursor: pointer;
-        border-radius: 6px;
         transition: 0.3s;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
     }
 
     .nav button:hover {
-        background: #357ABD;
+        background: #7593AF;
+        transform: translateY(-2px);
     }
 
+    /* 激活状态按钮 */
+    .nav button.active {
+        background: #194A7A;
+        transform: scale(1.05);
+    }
+
+    /* ----------- 内容卡片固定高度600px ----------- */
     .section {
-        background: #4A90E2;
-        color: white;
+        background: white;
         padding: 40px;
-        margin-bottom: 20px;
-        border-radius: 10px;
-        font-size: 20px;
-        display: none; /* 默认隐藏 */
+        border-radius: 15px;
+        display: none;
+        font-size: 18px;
+        line-height: 1.8;
+        width: 100%;
+        height: 600px;     /* 固定高度 */
+        box-shadow: 0px 6px 25px rgba(0,0,0,0.1);
+        overflow-y: auto;  /* 内容过多可滚动 */
+        animation: fade .5s ease-in-out;
     }
 
     .section.active {
         display: block;
     }
+
+    @keyframes fade {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
 </style>
 </head>
 
 <body>
 
-<div class="left">
-    <div class="avatar">图片</div>
-</div>
+<div class="container">
 
-<div class="right">
-
-    <!-- 导航按钮 -->
-    <div class="nav">
-        <button onclick="showSection(1)">介绍1</button>
-        <button onclick="showSection(2)">介绍2</button>
-        <button onclick="showSection(3)">介绍3</button>
-        <button onclick="showSection(4)">介绍4</button>
+    <div class="left">
+        <div class="avatar">图片</div>
     </div>
 
-    <!-- 内容区 -->
-    <div id="sec1" class="section active">个人简介1</div>
-    <div id="sec2" class="section">个人简介2</div>
-    <div id="sec3" class="section">个人简介3</div>
-    <div id="sec4" class="section">个人简介4</div>
+    <div class="right">
 
+        <!-- 导航 -->
+        <div class="nav">
+            <button class="active" onclick="showSection(1, this)">个人资料</button>
+            <button onclick="showSection(2, this)">个人概况</button>
+            <button onclick="showSection(3, this)">研究领域</button>
+            <button onclick="showSection(4, this)">个人成果</button>
+        </div>
+
+        <!-- 内容区域 -->
+        <div id="sec1" class="section active">这里是简介 1 的内容。</div>
+        <div id="sec2" class="section">这里是简介 2 的内容。</div>
+        <div id="sec3" class="section">这里是简介 3 的内容。</div>
+        <div id="sec4" class="section">这里是简介 4 的内容。</div>
+
+    </div>
 </div>
 
 <script>
-    function showSection(num) {
+    function showSection(num, btn) {
         document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
+        document.querySelectorAll(".nav button").forEach(b => b.classList.remove("active"));
+
         document.getElementById("sec" + num).classList.add("active");
+        btn.classList.add("active");
     }
 </script>
 
